@@ -1,0 +1,14 @@
+---
+test:
+  username: Username
+  password: Password
+  platform: ios
+  connection_options:
+    netmiko:
+      extras:
+        secret: Password
+    napalm:
+      extras:
+        optional_args:
+          fast_cli: False
+          secret: Password
