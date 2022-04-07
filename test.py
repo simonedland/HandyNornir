@@ -17,7 +17,7 @@ import time
 
 #future ideas for projekts
 #python bor
-#CDP based LAG constructor
+#CDP or IP based LAG constructor
 #micro segmenter on subb interfaces for ip coonfiguration when connectivity is needed while configing ips not concluded if i want this to be based on CDP or IP adresses
 #leaf stuff
 #auto secuing based on standards (dhcp snooping, dynamic arp inspection, port security, disabeling ports that is not needed)
