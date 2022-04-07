@@ -3,6 +3,11 @@
 #the leafs then knowing what nic goes to what spine can configgure to use the right ip based on it knowing what spine it self is
 #would like to know a beter way to do this
 
+#inputs wil probably be (where the spines at, what subbnet to segment, and how manny segments, where the spines at)
+#could probably just auto detect all that
+
+
+
 from nornir_utils.plugins.functions import print_result
 from nornir_netmiko.tasks import netmiko_send_command, netmiko_send_config
 
