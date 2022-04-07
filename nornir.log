@@ -329,3 +329,9 @@ TypeError: 'Result' object is not iterable
 2022-04-07 13:43:35,474 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
 2022-04-07 14:12:36,223 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
 2022-04-07 14:29:38,260 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-07 14:50:53,314 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-07 14:51:21,503 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-07 14:51:36,263 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-07 14:59:12,930 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-07 15:02:18,583 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-07 15:02:39,183 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts

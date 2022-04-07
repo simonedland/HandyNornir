@@ -6,17 +6,22 @@
 #inputs wil probably be (where the spines at, what subbnet to segment, and how manny segments, where the spines at)
 #could probably just auto detect all that
 
+#i realy want to base this on CDP or LLDP
+
 
 
 from nornir_utils.plugins.functions import print_result
 from nornir_netmiko.tasks import netmiko_send_command, netmiko_send_config
 
 def getIntInfo(node):
-    return node.run(task=netmiko_send_command, command_string=("sh ip int br"), enable=True, use_textfsm=True)
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True)
 
 
 def MicroSegmenter(node):
     intInfo = getIntInfo(node)
     node.host["facts"] = intInfo.result
-    for x in node.host["facts"]:
-        print(x)
+    
+    print(node.host["facts"])
+    print(node.host["facts"][node.host["facts"].find("Device ID:"):node.host["facts"].find("Device ID:")+10])
+    #for x in node.host["facts"]:
+    #    print(x)
