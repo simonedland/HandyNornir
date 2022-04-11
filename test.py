@@ -25,7 +25,7 @@ import time
 startTime=time.time()
 
 nr = InitNornir(
-    config_file="E:/NornirAutoSubbnetter/config.yaml"
+    config_file="config.yaml"
     )
 
 

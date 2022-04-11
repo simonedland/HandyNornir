@@ -335,3 +335,1226 @@ TypeError: 'Result' object is not iterable
 2022-04-07 14:59:12,930 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
 2022-04-07 15:02:18,583 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
 2022-04-07 15:02:39,183 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:05:05,832 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:05:10,842 - nornir.core.task -    ERROR -      start() - Host 'host1.cmh': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/util.py", line 279, in retry_on_signal
+    return function()
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 1.1.1.1:22
+
+
+
+2022-04-10 04:05:10,843 - nornir.core.task -    ERROR -      start() - Host 'host1.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 21, in MicroSegmenter
+    intInfo = getIntInfo(node)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 17, in getIntInfo
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-04-10 04:05:47,332 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:05:52,343 - nornir.core.task -    ERROR -      start() - Host 'host1.cmh': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/util.py", line 279, in retry_on_signal
+    return function()
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 1.1.1.1:22
+
+
+
+2022-04-10 04:05:52,345 - nornir.core.task -    ERROR -      start() - Host 'host1.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 21, in MicroSegmenter
+    intInfo = getIntInfo(node)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 17, in getIntInfo
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-04-10 04:28:21,331 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:28:21,359 - nornir.core.task -    ERROR -      start() - Host 'host1.cmh': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 368, in connect
+    raise NoValidConnectionsError(errors)
+paramiko.ssh_exception.NoValidConnectionsError: [Errno None] Unable to connect to port 22 on 7.7.7.7
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 7.7.7.7:22
+
+
+
+2022-04-10 04:28:21,360 - nornir.core.task -    ERROR -      start() - Host 'host1.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 21, in MicroSegmenter
+    intInfo = getIntInfo(node)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 17, in getIntInfo
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-04-10 04:32:29,777 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:38:57,181 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:46:35,646 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:48:13,112 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:48:41,743 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:50:35,247 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:51:00,237 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:51:48,437 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:51:50,470 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 25, in MicroSegmenter
+    print(node.host["facts"][node.host["facts"].find("Device ID:"):node.host["facts"].find("Device ID:")+30].split(" ", "\n"))
+TypeError: 'str' object cannot be interpreted as an integer
+
+2022-04-10 04:52:19,697 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:52:46,637 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:53:12,422 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:53:21,714 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:53:52,254 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:54:34,858 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:55:50,414 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:57:20,667 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:57:43,680 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:57:59,448 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 04:58:24,344 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 05:18:47,081 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 05:18:48,995 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 25, in MicroSegmenter
+    for x in range(int(node.host["facts"][node.host["facts"].find("Total cdp entries displayed :"):node.host["facts"].find("Total cdp entries displayed :")+len("Total cdp entries displayed :")+3])):
+ValueError: invalid literal for int() with base 10: 'Total cdp entries displayed : 2'
+
+2022-04-10 05:21:14,893 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 05:21:16,605 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 25, in MicroSegmenter
+    for x in range(int(node.host["facts"][node.host["facts"].find("Total cdp entries displayed :"):node.host["facts"].find("Total cdp entries displayed :")+30])):
+ValueError: invalid literal for int() with base 10: 'Total cdp entries displayed : '
+
+2022-04-10 05:21:28,561 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 05:21:30,356 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 25, in MicroSegmenter
+    for x in range(int(node.host["facts"][node.host["facts"].find("Total cdp entries displayed :"):node.host["facts"].find("Total cdp entries displayed :")+30])):
+ValueError: invalid literal for int() with base 10: 'Total cdp entries displayed : '
+
+2022-04-10 05:21:40,867 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 05:21:42,672 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 25, in MicroSegmenter
+    for x in range(int(node.host["facts"][node.host["facts"].find("Total cdp entries displayed :"):node.host["facts"].find("Total cdp entries displayed :")+30])):
+ValueError: invalid literal for int() with base 10: 'Total cdp entries displayed : '
+
+2022-04-10 05:22:14,697 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 05:22:16,598 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 25, in MicroSegmenter
+    for x in range(int(node.host["facts"][node.host["facts"].find("Total cdp entries displayed :"):node.host["facts"].find("Total cdp entries displayed :")+30])):
+ValueError: invalid literal for int() with base 10: 'Total cdp entries displayed : '
+
+2022-04-10 05:22:43,286 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 05:29:31,092 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 05:30:51,474 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 05:59:11,660 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 05:59:13,265 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 29, in MicroSegmenter
+    print (node.host["facts"][x+30][x+35])
+IndexError: string index out of range
+
+2022-04-10 05:59:29,036 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 06:00:01,868 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 06:00:43,438 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 06:01:06,334 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 06:01:24,818 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 06:01:37,742 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 06:02:17,980 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 06:02:41,488 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 06:04:26,814 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 06:04:42,268 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 06:05:05,907 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-10 06:05:24,082 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 02:55:16,198 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 02:55:21,383 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 412, in connect
+    server_key = t.get_remote_server_key()
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/transport.py", line 878, in get_remote_server_key
+    raise SSHException("No existing session")
+paramiko.ssh_exception.SSHException: No existing session
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 980, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: Paramiko: 'No existing session' error: try increasing 'conn_timeout' to 10 seconds or larger.
+
+2022-04-11 02:55:21,384 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 21, in MicroSegmenter
+    intInfo = getIntInfo(node)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 17, in getIntInfo
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-04-11 02:55:34,083 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 02:57:39,866 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 02:57:50,660 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 03:02:24,931 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 03:02:38,336 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 03:02:52,985 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 03:03:39,116 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 03:33:49,945 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 03:34:42,385 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 03:35:23,783 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 03:38:42,717 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 07:08:44,590 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 07:19:50,327 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 07:37:01,796 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 07:37:23,042 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 07:37:59,129 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 07:38:04,813 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 07:45:24,089 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 07:45:27,790 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 34, in MicroSegmenter
+    node.host["intf"],node.host["self"]  = intInfo.result
+AttributeError: 'tuple' object has no attribute 'result'
+
+2022-04-11 07:47:01,047 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 07:47:04,484 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 34, in MicroSegmenter
+    node.host["intf"], node.host["self"]  = intInfo.result
+AttributeError: 'tuple' object has no attribute 'result'
+
+2022-04-11 07:48:11,471 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 07:49:34,622 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 07:51:55,043 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 07:52:07,277 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 1 hosts
+2022-04-11 07:56:25,820 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 07:56:30,840 - nornir.core.task -    ERROR -      start() - Host 'host1.cmh': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/util.py", line 279, in retry_on_signal
+    return function()
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 1.1.1.1:22
+
+
+
+2022-04-11 07:56:30,841 - nornir.core.task -    ERROR -      start() - Host 'host1.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 33, in MicroSegmenter
+    intInfo = getIntInfo(node)[0]
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 29, in getIntInfo
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True), node.run(task=netmiko_send_command, command_string=("sh run"), enable=True, use_textfsm=True)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-04-11 08:03:18,298 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 08:27:02,193 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 08:36:42,247 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 08:36:47,937 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 54, in MicroSegmenter
+    LeafNr=node.host["self"][nlocationOfQuote+12:locationOfQuote+14]
+NameError: name 'nlocationOfQuote' is not defined
+
+2022-04-11 08:37:09,261 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 08:37:16,192 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 54, in MicroSegmenter
+    LeafNr=node.host["self"][nlocationOfQuote+12:locationOfQuote+14]
+NameError: name 'nlocationOfQuote' is not defined
+
+2022-04-11 08:37:38,234 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 08:37:44,885 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 54, in MicroSegmenter
+    LeafNr=node.host["self"][nlocationOfQuote+12:locationOfQuote+14]
+NameError: name 'nlocationOfQuote' is not defined
+
+2022-04-11 08:38:48,742 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 08:38:56,768 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 55, in MicroSegmenter
+    print(f"this interface wil choose ip range"+ subbnetspine1[LeafNr])
+TypeError: list indices must be integers or slices, not str
+
+2022-04-11 08:39:13,579 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 08:39:20,319 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 55, in MicroSegmenter
+    print(f"this interface wil choose ip range"+ subbnetspine1[LeafNr])
+TypeError: list indices must be integers or slices, not str
+
+2022-04-11 08:39:57,438 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 08:40:04,410 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 55, in MicroSegmenter
+    print(f"this interface wil choose ip range"+ subbnetspine1[LeafNr])
+TypeError: list indices must be integers or slices, not str
+
+2022-04-11 08:41:00,247 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 08:41:06,336 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 55, in MicroSegmenter
+    print(f"this interface wil choose ip range"+ subbnetspine1[LeafNr])
+TypeError: can only concatenate str (not "dict") to str
+
+2022-04-11 08:42:56,453 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 08:43:03,382 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 55, in MicroSegmenter
+    print(f"this interface wil choose ip range"+ subbnetspine1[LeafNr])
+TypeError: can only concatenate str (not "dict") to str
+
+2022-04-11 08:43:36,470 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 09:34:27,813 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 09:37:16,849 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 09:37:23,602 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 61, in MicroSegmenter
+    MyIp=f"{relevantSubbnet['broadcast'].split('.')[0]}.{relevantSubbnet['broadcast'].split('.')[1]}.{relevantSubbnet['broadcast'].split('.')[2]}.{relevantSubbnet['broadcast'].split('.')[3]-1}"
+TypeError: unsupported operand type(s) for -: 'str' and 'int'
+
+2022-04-11 09:38:55,367 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 09:39:02,043 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 61, in MicroSegmenter
+    MyIp=(f"{relevantSubbnet['broadcast'].split('.')[0]}.{relevantSubbnet['broadcast'].split('.')[1]}.{relevantSubbnet['broadcast'].split('.')[2]}.{relevantSubbnet['broadcast'].split('.')[3]-1}")
+TypeError: unsupported operand type(s) for -: 'str' and 'int'
+
+2022-04-11 09:39:58,659 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 09:40:35,455 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 09:41:07,598 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 09:41:14,571 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 61, in MicroSegmenter
+    MyIp=(f"{relevantSubbnet['broadcast'].split('.')[0]}.{relevantSubbnet['broadcast'].split('.')[1]}.{relevantSubbnet['broadcast'].split('.')[2]}.{relevantSubbnet['broadcast'].split('.')[3]-1}")
+TypeError: unsupported operand type(s) for -: 'str' and 'int'
+
+2022-04-11 09:41:50,247 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 09:51:42,398 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 09:57:28,303 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 09:57:34,934 - nornir.core.task -    ERROR -      start() - Host 'host1.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 68, in MicroSegmenter
+    test = int(cdpNeigbourDirections["name"][-0:-2])
+TypeError: list indices must be integers or slices, not str
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 70, in MicroSegmenter
+    test = int(cdpNeigbourDirections["name"][-0:-1])
+TypeError: list indices must be integers or slices, not str
+
+2022-04-11 09:58:27,815 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 09:58:34,331 - nornir.core.task -    ERROR -      start() - Host 'host1.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 67, in MicroSegmenter
+    test = cdpNeigbourDirections["name"][0:-2]
+TypeError: list indices must be integers or slices, not str
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 69, in MicroSegmenter
+    test = cdpNeigbourDirections["name"][0:-1]
+TypeError: list indices must be integers or slices, not str
+
+2022-04-11 09:59:01,408 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 09:59:22,533 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 09:59:49,590 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:00:12,413 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:00:59,118 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:01:21,868 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:02:07,543 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:02:50,900 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:16:40,446 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:16:47,524 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 58, in MicroSegmenter
+    spineNr=int(neigbor("name")[4:6])
+TypeError: 'dict' object is not callable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 61, in MicroSegmenter
+    spineNr=int(neigbor("name")[4:5])
+TypeError: 'dict' object is not callable
+
+2022-04-11 10:17:10,534 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:17:16,922 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 59, in MicroSegmenter
+    spineNr=int(neigbor("name")[4:6])
+TypeError: 'dict' object is not callable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 62, in MicroSegmenter
+    spineNr=int(neigbor("name")[4:5])
+TypeError: 'dict' object is not callable
+
+2022-04-11 10:17:47,058 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:17:53,421 - nornir.core.task -    ERROR -      start() - Host 'host7.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 59, in MicroSegmenter
+    spineNr=neigbor("name")[4:6]
+TypeError: 'dict' object is not callable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 62, in MicroSegmenter
+    spineNr=int(neigbor("name")[4:5])
+TypeError: 'dict' object is not callable
+
+2022-04-11 10:18:30,237 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:19:26,058 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:23:28,519 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:29:11,500 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:29:53,704 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:30:30,854 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:30:37,256 - nornir.core.task -    ERROR -      start() - Host 'host1.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 80, in MicroSegmenter
+    SpineNr=int(node.host["self"][locationOfQuote+13:locationOfQuote+15].replace(" ",""))
+ValueError: invalid literal for int() with base 10: 'e1'
+
+2022-04-11 10:30:47,442 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:33:02,724 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 2 hosts
+2022-04-11 10:49:55,686 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 3 hosts
+2022-04-11 10:49:58,822 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 435, in connect
+    self._auth(
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 766, in _auth
+    raise saved_exception
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 753, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/transport.py", line 1563, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/auth_handler.py", line 258, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 972, in establish_connection
+    raise NetmikoAuthenticationException(msg)
+netmiko.ssh_exception.NetmikoAuthenticationException: Authentication to device failed.
+
+Common causes of this problem are:
+1. Invalid username and password
+2. Incorrect SSH-key file
+3. Connecting to the wrong device
+
+Device settings: cisco_ios 3.3.3.3:22
+
+
+Authentication failed.
+
+2022-04-11 10:49:58,823 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 39, in MicroSegmenter
+    intInfo = getIntInfo(node)[0]
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 16, in getIntInfo
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True), node.run(task=netmiko_send_command, command_string=("sh run"), enable=True, use_textfsm=True)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-04-11 10:51:09,143 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 3 hosts
+2022-04-11 10:51:12,121 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 435, in connect
+    self._auth(
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 766, in _auth
+    raise saved_exception
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 753, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/transport.py", line 1563, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/auth_handler.py", line 258, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 972, in establish_connection
+    raise NetmikoAuthenticationException(msg)
+netmiko.ssh_exception.NetmikoAuthenticationException: Authentication to device failed.
+
+Common causes of this problem are:
+1. Invalid username and password
+2. Incorrect SSH-key file
+3. Connecting to the wrong device
+
+Device settings: cisco_ios 3.3.3.3:22
+
+
+Authentication failed.
+
+2022-04-11 10:51:12,122 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 39, in MicroSegmenter
+    intInfo = getIntInfo(node)[0]
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 16, in getIntInfo
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True), node.run(task=netmiko_send_command, command_string=("sh run"), enable=True, use_textfsm=True)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-04-11 10:52:52,808 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 3 hosts
+2022-04-11 10:52:55,999 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 435, in connect
+    self._auth(
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 766, in _auth
+    raise saved_exception
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 753, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/transport.py", line 1563, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/auth_handler.py", line 258, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 972, in establish_connection
+    raise NetmikoAuthenticationException(msg)
+netmiko.ssh_exception.NetmikoAuthenticationException: Authentication to device failed.
+
+Common causes of this problem are:
+1. Invalid username and password
+2. Incorrect SSH-key file
+3. Connecting to the wrong device
+
+Device settings: cisco_ios 3.3.3.3:22
+
+
+Authentication failed.
+
+2022-04-11 10:52:56,000 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 39, in MicroSegmenter
+    intInfo = getIntInfo(node)[0]
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 16, in getIntInfo
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True), node.run(task=netmiko_send_command, command_string=("sh run"), enable=True, use_textfsm=True)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-04-11 10:56:12,177 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 3 hosts
+2022-04-11 10:56:15,696 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 435, in connect
+    self._auth(
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 766, in _auth
+    raise saved_exception
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 753, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/transport.py", line 1563, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/auth_handler.py", line 258, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 972, in establish_connection
+    raise NetmikoAuthenticationException(msg)
+netmiko.ssh_exception.NetmikoAuthenticationException: Authentication to device failed.
+
+Common causes of this problem are:
+1. Invalid username and password
+2. Incorrect SSH-key file
+3. Connecting to the wrong device
+
+Device settings: cisco_ios 3.3.3.3:22
+
+
+Authentication failed.
+
+2022-04-11 10:56:15,696 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 39, in MicroSegmenter
+    intInfo = getIntInfo(node)[0]
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 16, in getIntInfo
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True), node.run(task=netmiko_send_command, command_string=("sh run"), enable=True, use_textfsm=True)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-04-11 10:57:42,352 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 3 hosts
+2022-04-11 10:57:45,443 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 435, in connect
+    self._auth(
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 766, in _auth
+    raise saved_exception
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 753, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/transport.py", line 1563, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/auth_handler.py", line 258, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 972, in establish_connection
+    raise NetmikoAuthenticationException(msg)
+netmiko.ssh_exception.NetmikoAuthenticationException: Authentication to device failed.
+
+Common causes of this problem are:
+1. Invalid username and password
+2. Incorrect SSH-key file
+3. Connecting to the wrong device
+
+Device settings: cisco_ios 3.3.3.3:22
+
+
+Authentication failed.
+
+2022-04-11 10:57:45,444 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 39, in MicroSegmenter
+    intInfo = getIntInfo(node)[0]
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 16, in getIntInfo
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True), node.run(task=netmiko_send_command, command_string=("sh run"), enable=True, use_textfsm=True)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-04-11 10:59:33,150 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 3 hosts
+2022-04-11 10:59:36,123 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 435, in connect
+    self._auth(
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 766, in _auth
+    raise saved_exception
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 753, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/transport.py", line 1563, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/auth_handler.py", line 258, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 972, in establish_connection
+    raise NetmikoAuthenticationException(msg)
+netmiko.ssh_exception.NetmikoAuthenticationException: Authentication to device failed.
+
+Common causes of this problem are:
+1. Invalid username and password
+2. Incorrect SSH-key file
+3. Connecting to the wrong device
+
+Device settings: cisco_ios 3.3.3.3:22
+
+
+Authentication failed.
+
+2022-04-11 10:59:36,125 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 39, in MicroSegmenter
+    intInfo = getIntInfo(node)[0]
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 16, in getIntInfo
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True), node.run(task=netmiko_send_command, command_string=("sh run"), enable=True, use_textfsm=True)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-04-11 11:02:37,482 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 3 hosts
+2022-04-11 11:02:40,393 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 435, in connect
+    self._auth(
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 766, in _auth
+    raise saved_exception
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 753, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/transport.py", line 1563, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/auth_handler.py", line 258, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 972, in establish_connection
+    raise NetmikoAuthenticationException(msg)
+netmiko.ssh_exception.NetmikoAuthenticationException: Authentication to device failed.
+
+Common causes of this problem are:
+1. Invalid username and password
+2. Incorrect SSH-key file
+3. Connecting to the wrong device
+
+Device settings: cisco_ios 3.3.3.3:22
+
+
+Authentication failed.
+
+2022-04-11 11:02:40,395 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 39, in MicroSegmenter
+    intInfo = getIntInfo(node)[0]
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 16, in getIntInfo
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True), node.run(task=netmiko_send_command, command_string=("sh run"), enable=True, use_textfsm=True)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-04-11 11:03:32,362 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 3 hosts
+2022-04-11 11:03:35,560 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 435, in connect
+    self._auth(
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 766, in _auth
+    raise saved_exception
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 753, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/transport.py", line 1563, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/auth_handler.py", line 258, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 972, in establish_connection
+    raise NetmikoAuthenticationException(msg)
+netmiko.ssh_exception.NetmikoAuthenticationException: Authentication to device failed.
+
+Common causes of this problem are:
+1. Invalid username and password
+2. Incorrect SSH-key file
+3. Connecting to the wrong device
+
+Device settings: cisco_ios 3.3.3.3:22
+
+
+Authentication failed.
+
+2022-04-11 11:03:35,561 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 39, in MicroSegmenter
+    intInfo = getIntInfo(node)[0]
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 16, in getIntInfo
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True), node.run(task=netmiko_send_command, command_string=("sh run"), enable=True, use_textfsm=True)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-04-11 11:05:12,126 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 3 hosts
+2022-04-11 11:05:15,105 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 435, in connect
+    self._auth(
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 766, in _auth
+    raise saved_exception
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/client.py", line 753, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/transport.py", line 1563, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/toor/.local/lib/python3.8/site-packages/paramiko/auth_handler.py", line 258, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/home/toor/.local/lib/python3.8/site-packages/netmiko/base_connection.py", line 972, in establish_connection
+    raise NetmikoAuthenticationException(msg)
+netmiko.ssh_exception.NetmikoAuthenticationException: Authentication to device failed.
+
+Common causes of this problem are:
+1. Invalid username and password
+2. Incorrect SSH-key file
+3. Connecting to the wrong device
+
+Device settings: cisco_ios 3.3.3.3:22
+
+
+Authentication failed.
+
+2022-04-11 11:05:15,106 - nornir.core.task -    ERROR -      start() - Host 'host3.cmh': task 'MicroSegmenter' failed with traceback:
+Traceback (most recent call last):
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 39, in MicroSegmenter
+    intInfo = getIntInfo(node)[0]
+  File "/home/toor/Desktop/nornir/HandyNornir/microsegmenter.py", line 16, in getIntInfo
+    return node.run(task=netmiko_send_command, command_string=("sh cdp nei de"), enable=True, use_textfsm=True), node.run(task=netmiko_send_command, command_string=("sh run"), enable=True, use_textfsm=True)
+  File "/home/toor/.local/lib/python3.8/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-04-11 11:10:02,316 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 3 hosts
+2022-04-11 11:10:38,555 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 3 hosts
+2022-04-11 11:11:03,785 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 3 hosts
+2022-04-11 13:30:45,248 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 4 hosts
+2022-04-11 13:33:50,855 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 4 hosts
+2022-04-11 13:38:09,190 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 4 hosts
+2022-04-11 13:44:19,507 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 4 hosts

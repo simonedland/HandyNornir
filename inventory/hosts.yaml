@@ -3,15 +3,14 @@
      hostname: 1.1.1.1
      groups:
          - test
-
-# host2.cmh:
-#     hostname: 2.2.2.2
-#     groups:
-#         - test
-# host3.cmh:
-#     hostname: 3.3.3.3
-#     groups:
-#         - test
+ host2.cmh:
+     hostname: 2.2.2.2
+     groups:
+         - test
+ host3.cmh:
+     hostname: 3.3.3.3
+     groups:
+         - test
 # host4.cmh:
 #     hostname: 4.4.4.4
 #     groups:
@@ -24,7 +23,7 @@
 #     hostname: 6.6.6.6
 #     groups:
 #         - test
-# host7.cmh:
-#     hostname: 7.7.7.7
-#     groups:
-#         - test
+ host7.cmh:
+     hostname: 7.7.7.7
+     groups:
+         - test
