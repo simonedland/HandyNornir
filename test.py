@@ -30,7 +30,7 @@ nr = InitNornir(
 
 
 #testing new function before mooving it o a seperat file
-nr.run(task=MicroSegmenter)
+nr.run(task=MicroSegmenter, raise_on_error=True)
 
 
 

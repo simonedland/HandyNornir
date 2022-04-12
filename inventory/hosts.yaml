@@ -11,18 +11,18 @@
      hostname: 3.3.3.3
      groups:
          - test
-# host4.cmh:
-#     hostname: 4.4.4.4
-#     groups:
-#         - test
-# host5.cmh:
-#     hostname: 5.5.5.5
-#     groups:
-#         - test
-# host6.cmh:
-#     hostname: 6.6.6.6
-#     groups:
-#         - test
+ host4.cmh:
+     hostname: 4.4.4.4
+     groups:
+         - test
+ host5.cmh:
+     hostname: 5.5.5.5
+     groups:
+         - test
+ host6.cmh:
+     hostname: 6.6.6.6
+     groups:
+         - test
  host7.cmh:
      hostname: 7.7.7.7
      groups:

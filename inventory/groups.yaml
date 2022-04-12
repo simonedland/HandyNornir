@@ -6,6 +6,8 @@ test:
   connection_options:
     netmiko:
       extras:
+        fast_cli: False
+        conn_timeout: 100
         secret: Password
     napalm:
       extras:

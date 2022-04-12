@@ -66,21 +66,23 @@ def MicroSegmenter(node):
                     spineNr=int(neigbor["name"][5:6])
                 locationOfQuote=node.host["self"].find("hostname leaf") # finds out where it self says what leaf it is in the running config by looking for the hostname
                 LeafNr=int(node.host["self"][locationOfQuote+13:locationOfQuote+15].replace(" ","")) # converts the last part of the hostname in to a int example: leaf7 = 7
-                relevantSubbnet=listOfSubbnets[spineNr-1][LeafNr]
+                relevantSubbnet=listOfSubbnets[spineNr-1][LeafNr-1]
                 MyIp=(f"{relevantSubbnet['broadcast'].split('.')[0]}.{relevantSubbnet['broadcast'].split('.')[1]}.{relevantSubbnet['broadcast'].split('.')[2]}.{int(relevantSubbnet['broadcast'].split('.')[3])-1}")
                 print(f"this leaf interface wil choose the ip adress {MyIp}") #print for controll
 
 
     elif "hostname spine" in node.host["self"]:
         for neigbor in cdpNeigbourDirections:
-            #print(neigbor, "spine")
+            if neigbor["name"]=="Switch":
+                print("error in cdp neigbor name")
+                pass
             try:
                 leafNr = int(neigbor["name"][4:6])
             except:
                 leafNr = int(neigbor["name"][4:5])
             locationOfQuote=node.host["self"].find("hostname spine")
             SpineNr=int(node.host["self"][locationOfQuote+14:locationOfQuote+16].replace(" ",""))
-            relevantSubbnet=listOfSubbnets[SpineNr-1][leafNr]
+            relevantSubbnet=listOfSubbnets[SpineNr-1][leafNr-1]
             MyIp=(f"{relevantSubbnet['subbnetID'].split('.')[0]}.{relevantSubbnet['subbnetID'].split('.')[1]}.{relevantSubbnet['subbnetID'].split('.')[2]}.{int(relevantSubbnet['subbnetID'].split('.')[3])+1}")
             print(f"this spine interface wil choose the ip adress {MyIp}")
     
