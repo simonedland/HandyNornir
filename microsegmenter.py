@@ -51,12 +51,13 @@ def MicroSegmenter(node):
     cdpNeigbourDirections=[]
     for x in range(len(hostnames)):
         hostname = (node.host["intf"][hostnames[x]+11:hostnames[x]+24].split("\n")[0].split(".")[0])
-        interface = (node.host["intf"][interfaces[x]+11:interfaces[x]+30].split("\n")[0].split(",")[0])
+        interface = (node.host["intf"][interfaces[x]+11:interfaces[x]+30].split("\n")[0].split(".")[0])
         cdpNeigbourDirections.append({"name":hostname, "interface":interface})
     #print(cdpNeigbourDirections)
 
     #finds out if the relevant switch is a spine or leaf
     if "hostname leaf" in node.host["self"]: #checks if it self is a leaf
+        commandlist=[f'ip routing', f'int lo 0', f'ip ospf 1 a 0', f'exit']
         for neigbor in cdpNeigbourDirections: # if it is a leaf it loops trough al the cdp neigbor information
             #print(neigbor)
             if "spine" in neigbor["name"]: # if it finds spine 1 it wil do the following
@@ -68,10 +69,21 @@ def MicroSegmenter(node):
                 LeafNr=int(node.host["self"][locationOfQuote+13:locationOfQuote+15].replace(" ","")) # converts the last part of the hostname in to a int example: leaf7 = 7
                 relevantSubbnet=listOfSubbnets[spineNr-1][LeafNr-1]
                 MyIp=(f"{relevantSubbnet['broadcast'].split('.')[0]}.{relevantSubbnet['broadcast'].split('.')[1]}.{relevantSubbnet['broadcast'].split('.')[2]}.{int(relevantSubbnet['broadcast'].split('.')[3])-1}")
-                print(f"this leaf interface wil choose the ip adress {MyIp}") #print for controll
+                
+                commandlist.append(f"int {neigbor['interface']}.100")
+                commandlist.append(f"no sh")
+                commandlist.append(f"encap do 10")
+                commandlist.append(f"ip add {MyIp} {relevantSubbnet['mask']}")
+                commandlist.append(f"router ospf 1")
+                commandlist.append(f"network {relevantSubbnet['subbnetID']} {relevantSubbnet['mask']} a 0")
+
+        configSubIntf = node.run(task=netmiko_send_config, config_commands=commandlist)
+        print_result(configSubIntf)
+
 
 
     elif "hostname spine" in node.host["self"]:
+        commandlist=[f'ip routing', f'int lo 0', f'ip ospf 1 a 0', f'exit']
         for neigbor in cdpNeigbourDirections:
             if neigbor["name"]=="Switch":
                 print("error in cdp neigbor name")
@@ -84,7 +96,17 @@ def MicroSegmenter(node):
             SpineNr=int(node.host["self"][locationOfQuote+14:locationOfQuote+16].replace(" ",""))
             relevantSubbnet=listOfSubbnets[SpineNr-1][leafNr-1]
             MyIp=(f"{relevantSubbnet['subbnetID'].split('.')[0]}.{relevantSubbnet['subbnetID'].split('.')[1]}.{relevantSubbnet['subbnetID'].split('.')[2]}.{int(relevantSubbnet['subbnetID'].split('.')[3])+1}")
-            print(f"this spine interface wil choose the ip adress {MyIp}")
+            
+
+            commandlist.append(f"int {neigbor['interface']}.100")
+            commandlist.append(f"no sh")
+            commandlist.append(f"encap do 10")
+            commandlist.append(f"ip add {MyIp} {relevantSubbnet['mask']}")
+            commandlist.append(f"router ospf 1")
+            commandlist.append(f"network {relevantSubbnet['subbnetID']} {relevantSubbnet['mask']} a 0")
+        
+        configSubIntf = node.run(task=netmiko_send_config, config_commands=commandlist)
+        print_result(configSubIntf)
     
-    
-    print("_____")
+#74 sek before increasing mem and cpu on the spines
+#51 sek after
