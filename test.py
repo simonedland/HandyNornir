@@ -44,8 +44,8 @@ def main():
     #addingPools = nr.run(task=AddDHCPPools, ipconfigs=subbnets)
     #print_result(addingPools)
 
-    save = nr.run(task=SaveRunningToStart)
-    print_result(save)
+    #save = nr.run(task=SaveRunningToStart)
+    #print_result(save)
 
 main()
-print(f"the script took {time.time()-startTime} seconds")
+print(f"\n\n\n\n\nthe script took {time.time()-startTime} seconds")
