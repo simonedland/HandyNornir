@@ -29,20 +29,10 @@ nr = InitNornir(
     )
 
 
-#testing new function before mooving it o a seperat file
-nr.run(task=MicroSegmenter)
-
-
-
 def main():
-    subbnets = subbnetter(nettwork="10.0.0.0", 
-    nettworkReq=[
-    {"numberOfSubbnets":16, "requiredHosts":200},
-    {"numberOfSubbnets":20, "requiredHosts":20}
-    ])
-    
-    #addingPools = nr.run(task=AddDHCPPools, ipconfigs=subbnets)
-    #print_result(addingPools)
+
+    nr.run(task=MicroSegmenter)
+
 
     #save = nr.run(task=SaveRunningToStart)
     #print_result(save)

@@ -1,10 +1,3 @@
-#how to solve
-#i think i need to alocate one nettwork to eatch spine and then make then microsegment the networks to the leafs.
-#the leafs then knowing what nic goes to what spine can configgure to use the right ip based on it knowing what spine it self is
-#would like to know a beter way to do this
-
-#inputs wil probably be (where the spines at, what subbnet to segment, and how manny segments, where the spines at)
-#could probably just auto detect all that
 import time
 from tqdm import tqdm
 from Subbnetter import subbnetter
@@ -50,7 +43,8 @@ def MicroSegmenter(node):
     for x in range(len(hostnames)):
         hostname = (node.host["intf"][hostnames[x]+11:hostnames[x]+24].split("\n")[0].split(".")[0])
         interface = (node.host["intf"][interfaces[x]+11:interfaces[x]+30].split("\n")[0].split(".")[0])
-        cdpNeigbourDirections.append({"name":hostname, "interface":interface})
+        if hostname != "Switch":
+            cdpNeigbourDirections.append({"name":hostname, "interface":interface})
 
     #finds out if the relevant switch is a spine or leaf
     if "hostname leaf" in node.host["self"]: #checks if it self is a leaf
