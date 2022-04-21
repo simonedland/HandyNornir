@@ -27,3 +27,11 @@
      hostname: 7.7.7.7
      groups:
          - test
+ host8.cmh:
+     hostname: 8.8.8.8
+     groups:
+         - test
+ host9.cmh:
+     hostname: 9.9.9.9
+     groups:
+         - test
