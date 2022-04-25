@@ -10,6 +10,7 @@ from nornir_netmiko.tasks import netmiko_send_command, netmiko_send_config
 import time
 
 
+
 #todo
 #auto apply to routers
 #auto config ranges to dhcp server
@@ -33,9 +34,10 @@ def main():
 
     nr.run(task=MicroSegmenter)
 
-
     #save = nr.run(task=SaveRunningToStart)
     #print_result(save)
+
+
 
 main()
 print(f"\n\n\n\n\nthe script took {time.time()-startTime} seconds")

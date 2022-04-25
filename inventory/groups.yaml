@@ -7,7 +7,7 @@ test:
     netmiko:
       extras:
         fast_cli: False
-        conn_timeout: 1000
+        conn_timeout: 10
         secret: Password
     napalm:
       extras:
