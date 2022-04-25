@@ -9,30 +9,30 @@ def subbnetMicroSegmentListMaker():
     #if you need more spines you can always increase the loop amount
 
     subbnetList=[]
-    for x in range(0,9):
-        subbnetList.append(subbnetter(nettwork=f"10.100.{x}.0", 
+    for x in range(0,9): #makes 10 subbnets
+        subbnetList.append(subbnetter(nettwork=f"10.100.{x}.0",
             nettworkReq=[
             {"numberOfSubbnets":64, "requiredHosts":2},
-            ]))
+            ])) #makes 64 subbnets with 2 hosts each
 
     return subbnetList
 
 
 
-def MicroSegmenter(node):
+def MicroSegmenter(node): #this is the function that will be called by the nornir plugin
 
-    bar=tqdm(total=3, desc =str(node.host))
+    bar=tqdm(total=3, desc =str(node.host)) #this is the progress bar
 
     listOfSubbnets=subbnetMicroSegmentListMaker()#fetches the ip adress data for tyhe spine leaf copnnection
 
     #constructs the interface information and running config information
     #theese are stored in node.host[intf] and [self]
-    node.host["intf"] = node.run(task=netmiko_send_command, command_string=("sh cdp nei de")).result
-    bar.update()
-    tqdm.write(f"{node.host}: facts gathered 1 of 2")
-    node.host["self"] = node.run(task=netmiko_send_command, command_string=("sh run"), enable=True).result
-    bar.update()
-    tqdm.write(f"{node.host}: facts gathered 2 of 2")
+    node.host["intf"] = node.run(task=netmiko_send_command, command_string=("sh cdp nei de")).result #this is the interface information
+    bar.update() #updates the progress bar
+    tqdm.write(f"{node.host}: facts gathered 1 of 2") #writes to the progress bar
+    node.host["self"] = node.run(task=netmiko_send_command, command_string=("sh run"), enable=True).result #this is the running config
+    bar.update() #updates the progress bar
+    tqdm.write(f"{node.host}: facts gathered 2 of 2") #writes to the progress bar
     
     #finds all the locations of the keywords device id and interface
     #this information is on the cdp neigbour and is information about the neigbor bechause we are making a connection to the neigbour
@@ -41,10 +41,10 @@ def MicroSegmenter(node):
     #constructs a list of dictionaries with the values of hostname and what interface it is connected to
     cdpNeigbourDirections=[]
     for x in range(len(hostnames)):
-        hostname = (node.host["intf"][hostnames[x]+11:hostnames[x]+24].split("\n")[0].split(".")[0])
-        interface = (node.host["intf"][interfaces[x]+11:interfaces[x]+30].split("\n")[0].split(".")[0].split(",")[0])
+        hostname = (node.host["intf"][hostnames[x]+11:hostnames[x]+24].split("\n")[0].split(".")[0])#this is the hostname of the neigbour
+        interface = (node.host["intf"][interfaces[x]+11:interfaces[x]+30].split("\n")[0].split(".")[0].split(",")[0])#this is the interface that is connected to the neigbour
         if hostname != "Switch":
-            cdpNeigbourDirections.append({"name":hostname, "interface":interface})
+            cdpNeigbourDirections.append({"name":hostname, "interface":interface}) #adds the hostname and interface to the list
 
     #finds out if the relevant switch is a spine or leaf
     if "hostname leaf" in node.host["self"]: #checks if it self is a leaf
@@ -64,8 +64,8 @@ def MicroSegmenter(node):
                 commandlist.extend([f"int {neigbor['interface']}",f"no sh",f"no sw",f"ip add {MyIp} {relevantSubbnet['mask']}",f"router ospf 1",f"network {relevantSubbnet['subbnetID']} {relevantSubbnet['mask']} a 0"])
 
         #runns the list of commands and prints the result
-        configSubIntf = node.run(task=netmiko_send_config, config_commands=commandlist)
-        #print_result(configSubIntf)
+        configIntf = node.run(task=netmiko_send_config, config_commands=commandlist)
+        #print_result(configIntf)
 
 
 
@@ -86,8 +86,8 @@ def MicroSegmenter(node):
             
             commandlist.extend([f"int {neigbor['interface']}",f"no sh",f"no sw",f"ip add {MyIp} {relevantSubbnet['mask']}",f"router ospf 1",f"network {relevantSubbnet['subbnetID']} {relevantSubbnet['mask']} a 0"])
         
-        configSubIntf = node.run(task=netmiko_send_config, config_commands=commandlist)
-        #print_result(configSubIntf)
+        configIntf = node.run(task=netmiko_send_config, config_commands=commandlist)
+        #print_result(configIntf)
     bar.update()
     time.sleep(2)
     bar.leave = False
