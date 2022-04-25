@@ -8,14 +8,14 @@ def subbnetMicroSegmentListMaker():
     #this makes 10 subbnets with 64 microsegments (subbnets with 2 hosts) making it possible to have 10 spines and 64 leafs
     #if you need more spines you can always increase the loop amount
 
-    subbnetList=[]
+    subbnetList=[] #this is the list that will be returned
     for x in range(0,9): #makes 10 subbnets
         subbnetList.append(subbnetter(nettwork=f"10.100.{x}.0",
             nettworkReq=[
             {"numberOfSubbnets":64, "requiredHosts":2},
             ])) #makes 64 subbnets with 2 hosts each
 
-    return subbnetList
+    return subbnetList #returns the list
 
 
 
@@ -36,8 +36,8 @@ def MicroSegmenter(node): #this is the function that will be called by the norni
     
     #finds all the locations of the keywords device id and interface
     #this information is on the cdp neigbour and is information about the neigbor bechause we are making a connection to the neigbour
-    hostnames = [i for i in range(len(node.host["intf"])) if node.host["intf"].startswith("Device ID:", i)]
-    interfaces = [i for i in range(len(node.host["intf"])) if node.host["intf"].startswith("Interface:", i)]
+    hostnames = [i for i in range(len(node.host["intf"])) if node.host["intf"].startswith("Device ID:", i)] #finds the location of the device id
+    interfaces = [i for i in range(len(node.host["intf"])) if node.host["intf"].startswith("Interface:", i)] #finds the location of the interface
     #constructs a list of dictionaries with the values of hostname and what interface it is connected to
     cdpNeigbourDirections=[]
     for x in range(len(hostnames)):
@@ -64,13 +64,13 @@ def MicroSegmenter(node): #this is the function that will be called by the norni
                 commandlist.extend([f"int {neigbor['interface']}",f"no sh",f"no sw",f"ip add {MyIp} {relevantSubbnet['mask']}",f"router ospf 1",f"network {relevantSubbnet['subbnetID']} {relevantSubbnet['mask']} a 0"])
 
         #runns the list of commands and prints the result
-        configIntf = node.run(task=netmiko_send_config, config_commands=commandlist)
+        configIntf = node.run(task=netmiko_send_config, config_commands=commandlist) #runs the command list
         #print_result(configIntf)
 
 
 
-    elif "hostname spine" in node.host["self"]:
-        commandlist=[f'ip routing', f'int lo 0', f'ip ospf 1 a 0', f'exit']
+    elif "hostname spine" in node.host["self"]: #checks if it self is a spine
+        commandlist=[f'ip routing', f'int lo 0', f'ip ospf 1 area 0', f'exit'] # adds the commands to add the loopback interface to a 0 of ospf in the creation of the command list
         for neigbor in cdpNeigbourDirections: # if it is a spine it loops trough al the cdp neigbor information
             if "leaf" in neigbor["name"]: # if it finds leaf it wil do the following
                 try:
@@ -88,8 +88,8 @@ def MicroSegmenter(node): #this is the function that will be called by the norni
         
         configIntf = node.run(task=netmiko_send_config, config_commands=commandlist)
         #print_result(configIntf)
-    bar.update()
-    time.sleep(2)
-    bar.leave = False
+    bar.update() #updates the progress bar
+    time.sleep(2) #sleeps for 2 seconds to make sure the commands are done
+    bar.leave = False #leaves the progress bar
 #74 sek before increasing mem and cpu on the spines
 #51 sek after
