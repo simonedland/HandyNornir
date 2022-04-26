@@ -1,2 +1,4 @@
 2022-04-25 06:51:51,032 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 16 hosts
 2022-04-25 07:04:26,657 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 16 hosts
+2022-04-25 08:24:21,637 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 16 hosts
+2022-04-25 08:27:31,247 -  nornir.core -     INFO -        run() - Running task 'SaveRunningToStart' with args {} on 16 hosts

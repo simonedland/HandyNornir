@@ -9,7 +9,6 @@ from nornir_netmiko.tasks import netmiko_send_command, netmiko_send_config
 import time
 
 
-
 #todo:
 #auto apply to routers
 #auto config ranges to dhcp server
@@ -19,6 +18,7 @@ import time
 #python bor
 #CDP based LAG constructor
 #auto secuing based on standards (dhcp snooping, dynamic arp inspection, port security, disabeling ports that is not needed)
+
 
 startTime=time.time() #this is the start time of the program
 
@@ -34,5 +34,5 @@ def main():
 
 
 
-main()
+main() #run the main function
 print(f"\n\n\n\n\nthe script took {time.time()-startTime} seconds") #prints how long the script took to run
