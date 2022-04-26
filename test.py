@@ -27,7 +27,7 @@ nr = InitNornir(config_file="config.yaml") #this is the nornir object
 
 def main():
 
-    #nr.run(task=MicroSegmenter)
+    nr.run(task=MicroSegmenter)
 
 
     save = nr.run(task=SaveRunningToStart)

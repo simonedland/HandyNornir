@@ -3,6 +3,12 @@ from tqdm import tqdm
 from Subbnetter import subbnetter
 from nornir_utils.plugins.functions import print_result
 from nornir_netmiko.tasks import netmiko_send_command, netmiko_send_config
+#to do:
+#make more modular
+#give the user the ability to choose the length of dom name
+
+
+
 
 def subbnetMicroSegmentListMaker():
     #this makes 10 subbnets with 64 microsegments (subbnets with 2 hosts) making it possible to have 10 spines and 64 leafs
@@ -10,7 +16,7 @@ def subbnetMicroSegmentListMaker():
 
     subbnetList=[] #this is the list that will be returned
     for x in range(0,9): #makes 10 subbnets
-        subbnetList.append(subbnetter(nettwork=f"10.100.{x}.0",
+        subbnetList.append(subbnetter(nettwork=f"10.1.{x}.0",
             nettworkReq=[
             {"numberOfSubbnets":64, "requiredHosts":2},
             ])) #makes 64 subbnets with 2 hosts each
@@ -61,7 +67,7 @@ def MicroSegmenter(node): #this is the function that will be called by the norni
                 MyIp=(f"{relevantSubbnet['broadcast'].split('.')[0]}.{relevantSubbnet['broadcast'].split('.')[1]}.{relevantSubbnet['broadcast'].split('.')[2]}.{int(relevantSubbnet['broadcast'].split('.')[3])-1}")#places it self one IP under the broadcast
                 
                 #prepaires the list of commands needed to add itself to OSPF and find the correct ip adress in the microsegment
-                commandlist.extend([f"int {neigbor['interface']}",f"no switch",f"exit",f"int {neigbor['interface']}.100",f"no sh",f"encap do 10",f"ip add {MyIp} {relevantSubbnet['mask']}",f"router ospf 1",f"network {relevantSubbnet['subbnetID']} {relevantSubbnet['mask']} a 0"])
+                commandlist.extend([f"int {neigbor['interface']}",f"no switch",f"no sh",f"ip add {MyIp} {relevantSubbnet['mask']}",f"router ospf 1",f"network {relevantSubbnet['subbnetID']} {relevantSubbnet['mask']} a 0"])
 
         #runns the list of commands and prints the result
         configIntf = node.run(task=netmiko_send_config, config_commands=commandlist) #runs the command list
@@ -72,20 +78,20 @@ def MicroSegmenter(node): #this is the function that will be called by the norni
     elif "hostname spine" in node.host["self"]:
         commandlist=[f'ip routing', f'int lo 0', f'ip ospf 1 a 0', f'exit']
         for neigbor in cdpNeigbourDirections:
-            #print(neigbor)
-            if "leaf" in neigbor["name"]:
+            #print(neigbor) #prints the neigbor information
+            if "leaf" in neigbor["name"]: #if it finds leaf it will do the following
                 try:
                     leafNr = int(neigbor["name"][4:6])
                 except:
                     leafNr = int(neigbor["name"][4:5])
             else:
-                pass
+                pass #if it is not a leaf it will do nothing
             locationOfQuote=node.host["self"].find("hostname spine")
             SpineNr=int(node.host["self"][locationOfQuote+14:locationOfQuote+16].replace(" ",""))
             relevantSubbnet=listOfSubbnets[SpineNr-1][leafNr-1]
             MyIp=(f"{relevantSubbnet['subbnetID'].split('.')[0]}.{relevantSubbnet['subbnetID'].split('.')[1]}.{relevantSubbnet['subbnetID'].split('.')[2]}.{int(relevantSubbnet['subbnetID'].split('.')[3])+1}")
             
-            commandlist.extend([f"int {neigbor['interface']}",f"no switch",f"exit",f"int {neigbor['interface']}.100",f"no sh",f"encap do 10",f"ip add {MyIp} {relevantSubbnet['mask']}",f"router ospf 1",f"network {relevantSubbnet['subbnetID']} {relevantSubbnet['mask']} a 0"])
+            commandlist.extend([f"int {neigbor['interface']}",f"no switch",f"no sh",f"ip add {MyIp} {relevantSubbnet['mask']}",f"router ospf 1",f"network {relevantSubbnet['subbnetID']} {relevantSubbnet['mask']} a 0"])
         
         configSubIntf = node.run(task=netmiko_send_config, config_commands=commandlist)
         #print_result(configSubIntf)
