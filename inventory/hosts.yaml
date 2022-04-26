@@ -36,6 +36,7 @@
      groups:
          - test
  host10.cmh:
+<<<<<<< Updated upstream
      hostname: 10.1.2.11
      groups:
          - test
@@ -63,3 +64,24 @@
      hostname: 10.1.2.17
      groups:
          - test
+=======
+     hostname: 10.10.10.10
+     groups:
+         - test
+ host11.cmh:
+     hostname: 11.11.11.11
+     groups:
+         - test
+ host12.cmh:
+     hostname: 12.12.12.12
+     groups:
+         - test
+ host13.cmh:
+     hostname: 13.13.13.13
+     groups:
+         - test
+ host14.cmh:
+     hostname: 14.14.14.14
+     groups:
+         - test
+>>>>>>> Stashed changes

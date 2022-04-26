@@ -41,8 +41,8 @@ def MicroSegmenter(node): #this is the function that will be called by the norni
     #constructs a list of dictionaries with the values of hostname and what interface it is connected to
     cdpNeigbourDirections=[]
     for x in range(len(hostnames)):
-        hostname = (node.host["intf"][hostnames[x]+11:hostnames[x]+24].split("\n")[0].split(".")[0])#this is the hostname of the neigbour
-        interface = (node.host["intf"][interfaces[x]+11:interfaces[x]+30].split("\n")[0].split(".")[0].split(",")[0])#this is the interface that is connected to the neigbour
+        hostname = (node.host["intf"][hostnames[x]+11:hostnames[x]+24].split("\n")[0].split(".")[0])
+        interface = (node.host["intf"][interfaces[x]+11:interfaces[x]+30].split("\n")[0].split(".")[0].split(",")[0])
         if hostname != "Switch":
             cdpNeigbourDirections.append({"name":hostname, "interface":interface}) #adds the hostname and interface to the list
 
@@ -61,7 +61,7 @@ def MicroSegmenter(node): #this is the function that will be called by the norni
                 MyIp=(f"{relevantSubbnet['broadcast'].split('.')[0]}.{relevantSubbnet['broadcast'].split('.')[1]}.{relevantSubbnet['broadcast'].split('.')[2]}.{int(relevantSubbnet['broadcast'].split('.')[3])-1}")#places it self one IP under the broadcast
                 
                 #prepaires the list of commands needed to add itself to OSPF and find the correct ip adress in the microsegment
-                commandlist.extend([f"int {neigbor['interface']}",f"no sh",f"no sw",f"ip add {MyIp} {relevantSubbnet['mask']}",f"router ospf 1",f"network {relevantSubbnet['subbnetID']} {relevantSubbnet['mask']} a 0"])
+                commandlist.extend([f"int {neigbor['interface']}",f"no switch",f"exit",f"int {neigbor['interface']}.100",f"no sh",f"encap do 10",f"ip add {MyIp} {relevantSubbnet['mask']}",f"router ospf 1",f"network {relevantSubbnet['subbnetID']} {relevantSubbnet['mask']} a 0"])
 
         #runns the list of commands and prints the result
         configIntf = node.run(task=netmiko_send_config, config_commands=commandlist) #runs the command list
@@ -69,10 +69,11 @@ def MicroSegmenter(node): #this is the function that will be called by the norni
 
 
 
-    elif "hostname spine" in node.host["self"]: #checks if it self is a spine
-        commandlist=[f'ip routing', f'int lo 0', f'ip ospf 1 area 0', f'exit'] # adds the commands to add the loopback interface to a 0 of ospf in the creation of the command list
-        for neigbor in cdpNeigbourDirections: # if it is a spine it loops trough al the cdp neigbor information
-            if "leaf" in neigbor["name"]: # if it finds leaf it wil do the following
+    elif "hostname spine" in node.host["self"]:
+        commandlist=[f'ip routing', f'int lo 0', f'ip ospf 1 a 0', f'exit']
+        for neigbor in cdpNeigbourDirections:
+            #print(neigbor)
+            if "leaf" in neigbor["name"]:
                 try:
                     leafNr = int(neigbor["name"][4:6])
                 except:
@@ -84,12 +85,12 @@ def MicroSegmenter(node): #this is the function that will be called by the norni
             relevantSubbnet=listOfSubbnets[SpineNr-1][leafNr-1]
             MyIp=(f"{relevantSubbnet['subbnetID'].split('.')[0]}.{relevantSubbnet['subbnetID'].split('.')[1]}.{relevantSubbnet['subbnetID'].split('.')[2]}.{int(relevantSubbnet['subbnetID'].split('.')[3])+1}")
             
-            commandlist.extend([f"int {neigbor['interface']}",f"no sh",f"no sw",f"ip add {MyIp} {relevantSubbnet['mask']}",f"router ospf 1",f"network {relevantSubbnet['subbnetID']} {relevantSubbnet['mask']} a 0"])
+            commandlist.extend([f"int {neigbor['interface']}",f"no switch",f"exit",f"int {neigbor['interface']}.100",f"no sh",f"encap do 10",f"ip add {MyIp} {relevantSubbnet['mask']}",f"router ospf 1",f"network {relevantSubbnet['subbnetID']} {relevantSubbnet['mask']} a 0"])
         
-        configIntf = node.run(task=netmiko_send_config, config_commands=commandlist)
-        #print_result(configIntf)
-    bar.update() #updates the progress bar
-    time.sleep(2) #sleeps for 2 seconds to make sure the commands are done
-    bar.leave = False #leaves the progress bar
+        configSubIntf = node.run(task=netmiko_send_config, config_commands=commandlist)
+        #print_result(configSubIntf)
+    bar.update()
+    time.sleep(2)
+    bar.leave = False
 #74 sek before increasing mem and cpu on the spines
 #51 sek after
