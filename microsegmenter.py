@@ -3,10 +3,13 @@ from tqdm import tqdm
 from Subbnetter import subbnetter
 from nornir_utils.plugins.functions import print_result
 from nornir_netmiko.tasks import netmiko_send_command, netmiko_send_config
-#to do:
-#make more modular
-#give the user the ability to choose the length of dom name or just inputt the dom name and leaf and spine names.
-#in addition to the dom name, the user can also choose th ip range for the leafs and spines
+
+
+#EXAMPLE OF HOW TO USE THE FUNCTION
+#nr.run(task=MicroSegmenter,SegmentationIps="10.1",
+#    SpineHostName="spine", 
+#    LeafHostname="leaf", 
+#    IpDomainName="simon")
 
 
 
@@ -46,10 +49,18 @@ def MicroSegmenter(node, SegmentationIps="10.1", SpineHostName="spine", LeafHost
     hostnames = [i for i in range(len(node.host["intf"])) if node.host["intf"].startswith("Device ID:", i)] #finds the location of the device id
     interfaces = [i for i in range(len(node.host["intf"])) if node.host["intf"].startswith("Interface:", i)] #finds the location of the interface
     #constructs a list of dictionaries with the values of hostname and what interface it is connected to
+
+    if len(SpineHostName) >= len(LeafHostname): #this is to check the spine hostname is longer than the leaf hostname
+        longestname = len(SpineHostName) #sets the longest name to the spine hostname
+    else:
+        longestname = len(LeafHostname)
+    
+
     cdpNeigbourDirections=[]
+    domNameLen=len(IpDomainName)
     for x in range(len(hostnames)):
-        hostname = (node.host["intf"][hostnames[x]+11:hostnames[x]+24].split("\n")[0].split(".")[0])
-        interface = (node.host["intf"][interfaces[x]+11:interfaces[x]+30].split("\n")[0].split(".")[0].split(",")[0]) #to do: make this more modular
+        hostname = (node.host["intf"][hostnames[x]+domNameLen+6:hostnames[x]+domNameLen+longestname+14].split("\n")[0].split(".")[0]) #this is the hostname of the neigbour
+        interface = (node.host["intf"][interfaces[x]+domNameLen+6:interfaces[x]+domNameLen+longestname+20].split("\n")[0].split(".")[0].split(",")[0]) #this is the interface that the neigbour is connected to
         if hostname != "Switch":
             cdpNeigbourDirections.append({"name":hostname, "interface":interface}) #adds the hostname and interface to the list
 

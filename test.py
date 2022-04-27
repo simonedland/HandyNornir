@@ -27,7 +27,10 @@ nr = InitNornir(config_file="config.yaml") #this is the nornir object
 
 def main():
 
-    nr.run(task=MicroSegmenter,SegmentationIps="10.1",SpineHostName="spine", LeafHostname="leaf")
+    nr.run(task=MicroSegmenter,SegmentationIps="10.1",
+    SpineHostName="spine", 
+    LeafHostname="leaf", 
+    IpDomainName="simon")
 
 
     #save = nr.run(task=SaveRunningToStart)
