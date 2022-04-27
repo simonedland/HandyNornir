@@ -4,6 +4,7 @@ from Subbnetter import subbnetter
 from AddDHCPools import AddDHCPPools
 from CopRunStart import SaveRunningToStart
 from microsegmenter import MicroSegmenter
+from portSecurer import PortSecurer
 from nornir_utils.plugins.functions import print_result
 from nornir_netmiko.tasks import netmiko_send_command, netmiko_send_config
 import time
@@ -26,14 +27,9 @@ nr = InitNornir(config_file="config.yaml") #this is the nornir object
 
 
 def main():
-    
-    nr.run(task=MicroSegmenter,SegmentationIps="10.1",
-        SpineHostName="spine", 
-        LeafHostname="leaf", 
-        IpDomainName="simon")
 
-    save = nr.run(task=SaveRunningToStart)
-    print_result(save)
+    PortSecurer()
+    
 
 main() #run the main function
 print(f"\n\n\n\n\nthe script took {time.time()-startTime} seconds") #prints how long the script took to run
