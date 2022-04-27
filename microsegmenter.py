@@ -5,18 +5,19 @@ from nornir_utils.plugins.functions import print_result
 from nornir_netmiko.tasks import netmiko_send_command, netmiko_send_config
 #to do:
 #make more modular
-#give the user the ability to choose the length of dom name
+#give the user the ability to choose the length of dom name or just inputt the dom name and leaf and spine names.
+#in addition to the dom name, the user can also choose th ip range for the leafs and spines
 
 
 
 
-def subbnetMicroSegmentListMaker():
+def subbnetMicroSegmentListMaker(SegmentationIps):
     #this makes 10 subbnets with 64 microsegments (subbnets with 2 hosts) making it possible to have 10 spines and 64 leafs
     #if you need more spines you can always increase the loop amount
 
     subbnetList=[] #this is the list that will be returned
     for x in range(0,9): #makes 10 subbnets
-        subbnetList.append(subbnetter(nettwork=f"10.1.{x}.0",
+        subbnetList.append(subbnetter(nettwork=f"{SegmentationIps}.{x}.0",
             nettworkReq=[
             {"numberOfSubbnets":64, "requiredHosts":2},
             ])) #makes 64 subbnets with 2 hosts each
@@ -25,11 +26,11 @@ def subbnetMicroSegmentListMaker():
 
 
 
-def MicroSegmenter(node): #this is the function that will be called by the nornir plugin
+def MicroSegmenter(node, SegmentationIps="10.1", SpineHostName="spine", LeafHostname="leaf", IpDomainName="simon"): #this is the function that will be called by the nornir plugin. the segmentation ips only support assigning the first two octets of the ip.
 
     bar=tqdm(total=3, desc =str(node.host)) #this is the progress bar
 
-    listOfSubbnets=subbnetMicroSegmentListMaker()#fetches the ip adress data for tyhe spine leaf copnnection
+    listOfSubbnets=subbnetMicroSegmentListMaker(SegmentationIps)#fetches the ip adress data for tyhe spine leaf copnnection
 
     #constructs the interface information and running config information
     #theese are stored in node.host[intf] and [self]
@@ -48,21 +49,23 @@ def MicroSegmenter(node): #this is the function that will be called by the norni
     cdpNeigbourDirections=[]
     for x in range(len(hostnames)):
         hostname = (node.host["intf"][hostnames[x]+11:hostnames[x]+24].split("\n")[0].split(".")[0])
-        interface = (node.host["intf"][interfaces[x]+11:interfaces[x]+30].split("\n")[0].split(".")[0].split(",")[0])
+        interface = (node.host["intf"][interfaces[x]+11:interfaces[x]+30].split("\n")[0].split(".")[0].split(",")[0]) #to do: make this more modular
         if hostname != "Switch":
             cdpNeigbourDirections.append({"name":hostname, "interface":interface}) #adds the hostname and interface to the list
 
     #finds out if the relevant switch is a spine or leaf
-    if "hostname leaf" in node.host["self"]: #checks if it self is a leaf
+    if f"hostname {LeafHostname}" in node.host["self"]: #checks if it self is a leaf
+        LenOfHostName=len(LeafHostname)
+        LenOfNeigborName=len(SpineHostName)
         commandlist=[f'ip routing', f'int lo 0', f'ip ospf 1 a 0', f'exit'] # adds the commands to add the loopback interface to a 0 of ospf in the creation of the command list
         for neigbor in cdpNeigbourDirections: # if it is a leaf it loops trough al the cdp neigbor information
-            if "spine" in neigbor["name"]: # if it finds spine it wil do the following
+            if SpineHostName in neigbor["name"]: # if it finds spine it wil do the following
                 try: # finds out what number of spine it is the reason we do it this way is bechause we dont know if it is spine 20 or 2 so we try to convert the biggest first in to a string
-                    spineNr=int(neigbor["name"][5:7])
+                    spineNr=int(neigbor["name"][LenOfNeigborName:LenOfNeigborName+2])
                 except:
-                    spineNr=int(neigbor["name"][5:6])
-                locationOfQuote=node.host["self"].find("hostname leaf") # finds out where it self says what leaf it is in the running config by looking for the hostname
-                LeafNr=int(node.host["self"][locationOfQuote+13:locationOfQuote+15].replace(" ","")) # converts the last part of the hostname in to a int example: leaf7 = 7
+                    spineNr=int(neigbor["name"][LenOfNeigborName:LenOfNeigborName+1])
+                locationOfQuote=node.host["self"].find(f"hostname {LeafHostname}") # finds out where it self says what leaf it is in the running config by looking for the hostname
+                LeafNr=int(node.host["self"][locationOfQuote+LenOfHostName+9:locationOfQuote+LenOfHostName+11].replace(" ","")) # converts the last part of the hostname in to a int example: leaf7 = 7
                 relevantSubbnet=listOfSubbnets[spineNr-1][LeafNr-1]#naming of the spines and leafs starts at 1 but the lists start at 0
                 MyIp=(f"{relevantSubbnet['broadcast'].split('.')[0]}.{relevantSubbnet['broadcast'].split('.')[1]}.{relevantSubbnet['broadcast'].split('.')[2]}.{int(relevantSubbnet['broadcast'].split('.')[3])-1}")#places it self one IP under the broadcast
                 
@@ -75,19 +78,20 @@ def MicroSegmenter(node): #this is the function that will be called by the norni
 
 
 
-    elif "hostname spine" in node.host["self"]:
+    elif f"hostname {SpineHostName}" in node.host["self"]:
+        LenOfHostName=len(SpineHostName)
+        LenOfNeigborName=len(LeafHostname)
         commandlist=[f'ip routing', f'int lo 0', f'ip ospf 1 a 0', f'exit']
         for neigbor in cdpNeigbourDirections:
-            #print(neigbor) #prints the neigbor information
-            if "leaf" in neigbor["name"]: #if it finds leaf it will do the following
+            if LeafHostname in neigbor["name"]: #if it finds leaf it will do the following
                 try:
-                    leafNr = int(neigbor["name"][4:6])
+                    leafNr = int(neigbor["name"][LenOfNeigborName:LenOfNeigborName+2])
                 except:
-                    leafNr = int(neigbor["name"][4:5])
+                    leafNr = int(neigbor["name"][LenOfNeigborName:LenOfNeigborName+1])
             else:
                 pass #if it is not a leaf it will do nothing
-            locationOfQuote=node.host["self"].find("hostname spine")
-            SpineNr=int(node.host["self"][locationOfQuote+14:locationOfQuote+16].replace(" ",""))
+            locationOfQuote=node.host["self"].find(f"hostname {SpineHostName}")
+            SpineNr=int(node.host["self"][locationOfQuote+LenOfHostName+9:locationOfQuote+LenOfHostName+11].replace(" ",""))
             relevantSubbnet=listOfSubbnets[SpineNr-1][leafNr-1]
             MyIp=(f"{relevantSubbnet['subbnetID'].split('.')[0]}.{relevantSubbnet['subbnetID'].split('.')[1]}.{relevantSubbnet['subbnetID'].split('.')[2]}.{int(relevantSubbnet['subbnetID'].split('.')[3])+1}")
             

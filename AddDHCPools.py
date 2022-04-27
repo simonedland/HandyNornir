@@ -8,6 +8,15 @@ def AddDHCPPools(node, ipconfigs, gateway="first"):
     the gateway is placed in the first avadable adress this can be spesified by setting the gateway="last" when caling
     """
     
+    #EXAMPLE OF HOW TO CALL THIS FUNCTION
+    #subbnets = subbnetter(nettwork=f"10.1.0.0",
+    #        nettworkReq=[
+    #        {"numberOfSubbnets":64, "requiredHosts":2},
+    #        ])
+    
+    #nr.run(task=AddDHCPPools, ipconfigs=subbnets)
+
+
     #todo
     #add dns option
     #add the option to reserve adresses

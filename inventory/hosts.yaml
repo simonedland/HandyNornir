@@ -39,3 +39,7 @@
      hostname: 10.0.2.11
      groups:
          - test
+ host11.cmh:
+     hostname: 10.0.2.12
+     groups:
+         - test

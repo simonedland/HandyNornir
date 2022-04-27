@@ -1,2 +1,7 @@
-2022-04-26 14:04:58,853 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {} on 10 hosts
-2022-04-26 14:05:16,438 -  nornir.core -     INFO -        run() - Running task 'SaveRunningToStart' with args {} on 10 hosts
+2022-04-27 10:02:34,904 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {'SegmentationIps': '10.1', 'SpineHostName': 'leaf', 'LeafHostname': 'spine'} on 10 hosts
+2022-04-27 10:03:08,531 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {'SegmentationIps': '10.1', 'SpineHostName': 'spine', 'LeafHostname': 'leaf'} on 10 hosts
+2022-04-27 10:04:35,068 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {'SegmentationIps': '10.1', 'SpineHostName': 'leaf', 'LeafHostname': 'spine'} on 10 hosts
+2022-04-27 10:14:16,518 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {'SegmentationIps': '10.1', 'SpineHostName': 'leaf', 'LeafHostname': 'spine'} on 11 hosts
+2022-04-27 10:15:03,918 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {'SegmentationIps': '10.1', 'SpineHostName': 'spine', 'LeafHostname': 'leaf'} on 11 hosts
+2022-04-27 10:16:26,022 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {'SegmentationIps': '10.1', 'SpineHostName': 'leaf', 'LeafHostname': 'spine'} on 11 hosts
+2022-04-27 10:18:21,350 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {'SegmentationIps': '10.1', 'SpineHostName': 'spine', 'LeafHostname': 'leaf'} on 11 hosts
