@@ -12,8 +12,6 @@ from nornir_netmiko.tasks import netmiko_send_command, netmiko_send_config
 #    IpDomainName="simon")
 
 
-
-
 def subbnetMicroSegmentListMaker(SegmentationIps):
     #this makes 10 subbnets with 64 microsegments (subbnets with 2 hosts) making it possible to have 10 spines and 64 leafs
     #if you need more spines you can always increase the loop amount

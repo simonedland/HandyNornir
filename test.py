@@ -26,15 +26,14 @@ nr = InitNornir(config_file="config.yaml") #this is the nornir object
 
 
 def main():
-
+    
     nr.run(task=MicroSegmenter,SegmentationIps="10.1",
-    SpineHostName="spine", 
-    LeafHostname="leaf", 
-    IpDomainName="simon")
+        SpineHostName="spine", 
+        LeafHostname="leaf", 
+        IpDomainName="simon")
 
-
-    #save = nr.run(task=SaveRunningToStart)
-    #print_result(save)
+    save = nr.run(task=SaveRunningToStart)
+    print_result(save)
 
 main() #run the main function
 print(f"\n\n\n\n\nthe script took {time.time()-startTime} seconds") #prints how long the script took to run
