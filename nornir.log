@@ -1,3 +1,0 @@
-2022-04-27 12:39:12,550 -  nornir.core -     INFO -        run() - Running task 'MicroSegmenter' with args {'SegmentationIps': '10.1', 'SpineHostName': 'spine', 'LeafHostname': 'leaf', 'IpDomainName': 'simon'} on 11 hosts
-2022-04-27 12:39:30,724 -  nornir.core -     INFO -        run() - Running task 'SaveRunningToStart' with args {} on 11 hosts
-2022-04-27 13:24:32,114 -  nornir.core -     INFO -        run() - Running task 'SaveRunningToStart' with args {} on 11 hosts

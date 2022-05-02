@@ -1,2 +1,5 @@
 nornir.log
 /__pycache__
+__pycache__/AddDHCPools.cpython-310.pyc
+__pycache__/CopRunStart.cpython-310.pyc
+__pycache__/Subbnetter.cpython-310.pyc
