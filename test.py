@@ -25,12 +25,14 @@ startTime=time.time() #this is the start time of the program
 
 nr = InitNornir(config_file="config.yaml") #this is the nornir object
 
+singleHost = nr.filter(name="host1.cmh") #this is the nornir object with only one host
 
 def main():
 
     #portSecurer.ARPMarker()
-    reeee=nr.run(task=portSecurer.PortMarker)
-    print_result(reeee)
+    reeee=nr.run(task=portSecurer.PortMarker, numberOfLayer2Ports=2)
+    #reeee = singleHost.run(task=portSecurer.PortMarker, numberOfLayer2Ports=2)
+    #print_result(reeee)
 
 main() #run the main function
 print(f"\n\n\n\n\nthe script took {time.time()-startTime} seconds") #prints how long the script took to run
